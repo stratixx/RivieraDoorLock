@@ -1,0 +1,11 @@
+#ifndef RFID_HEADER
+#define RFID_HEADER
+
+// DEFINICJE
+#define RFID_INTERFACE SPIC
+
+// NAG£ÓWKI FUNKCJI
+
+
+
+#endif
