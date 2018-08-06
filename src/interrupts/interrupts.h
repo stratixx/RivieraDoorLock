@@ -1,27 +1,52 @@
 #ifndef INTERRUPTS_HEADER
 #define INTERRUPTS_HEADER
 
+#include <avr/interrupt.h>
 
-typedef void(*callbackType)();
+/*
+	Wypisanie vectorów przerwañ w isr_listeners_list
+	W razie potrzeby dopisaæ kolejne
+*/
+enum vect_idx_type
+{
+	USARTE0_RXC_vect_idx,
+	USARTE0_TXC_vect_idx,
+	USARTE0_DRE_vect_idx,
+	USARTE0_INT0_vect_idx,
+	INTERRUPTS_LIST_SIZE
+};
 
+enum return_code
+{
+	OK,
+	ERROR
+};
+
+// Oko-umilacz
+#define InterruptsPointer Interrupts*
+//#define NULL 0
+
+/*
+	Klasa obs³uguj¹ca przypisanie vectora przerwania do obiektu klasy pochodnej
+	Klasa pochodna powinna implementowaæ metodê void isr( uint8_t ), 
+	a tak¿e zarejestrowaæ po¿¹dany vector przerwania
+*/
 class Interrupts
 {
 	public:
-	static uint8_t registerCallback( callbackType, uint8_t vectorNumber);
-	static uint8_t isCallbackRegistered( callbackType );
-	static callbackType* get_callback_by_isr_vector( uint8_t isr_vector );
-	static void isr_callbacks_routine( uint8_t isr_vector );
+	// Konstruktor tworz¹cy jednokrotnie listê s³uchaczy
+	Interrupts(void);
+	// Wywo³anie obs³ugi przerwania
+	static void isr_routine( uint8_t isr_vector );
 	
-	// domyÅ›lna procedura
-	static void isr_NULL_routine();
-	// Odebrany bajt
-	static void (*isr_USARTE0_RXC_routine)();	
-	// Wszystko wysÄ¹â€šane
-	static void (*isr_USARTE0_TXC_routine)();
-	// Miejsce w buforze
-	static void (*isr_USARTE0_DRE_routine)();
-	// 
-	static void (*isr_INT0_routine)();
+	protected:
+	static return_code register_ISR_listener( InterruptsPointer, uint8_t);
+	
+	private:
+	static InterruptsPointer* isr_listeners_list;
+	
+	static InterruptsPointer* get_listener( uint8_t isr_vector );	
+	virtual void isr( uint8_t ) {  };
 };
 
 #endif

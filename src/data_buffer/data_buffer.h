@@ -67,7 +67,7 @@ XXXXXXXXXXXXXX		tab_index
 typedef struct
 {
 	uint8_t *tab;				// wskaŸnik do tablicy
-	const uint8_t tab_index;	// index tablicy
+	uint8_t tab_index;	// index tablicy
 	uint8_t flag;				// rejestr flag
 	uint8_t read_index;			// index odczytu
 	uint8_t write_index;		// index zapisu

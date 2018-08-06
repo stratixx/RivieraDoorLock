@@ -1,17 +1,61 @@
 #include <avr/io.h>
 
 #include "../config/config.h"
-#include "HC_05/HC_05.h"
 #include "terminal.h"
+#include "HC_05/HC_05.h"
 
-//#define RX_BUFFER_INDEX 32 /* <=255 */
-//DATA_BUFFER_CREATE(rx_data_buffer_tab, RX_BUFFER_INDEX, rx_data_buffer)
-
-//#define TX_BUFFER_INDEX 32 /* <=255 */
-//DATA_BUFFER_CREATE(tx_data_buffer_tab, TX_BUFFER_INDEX, tx_data_buffer)
 
 void Terminal::init(void)
 {
 	hc_05.init();
 	
+}
+
+bool Terminal::isEnabled()
+{
+	return true;
+}
+
+bool Terminal::write_char( char znak )
+{
+	return true;
+}
+
+bool Terminal::write_uint8_t( uint8_t value)
+{
+	return true;
+}
+
+bool Terminal::write_uint16_t( uint16_t value)
+{
+	return true;
+}
+
+bool Terminal::write_string( char *string )
+{
+	return true;
+}
+
+char     Terminal::read_char(  )
+{	
+	return (char)hc_05.read_byte();
+}
+
+uint8_t  Terminal::read_uint8_t( )
+{	
+	return (uint8_t)hc_05.read_byte();
+}
+
+uint16_t Terminal::read_uint16_t( )
+{
+	uint16_t tmp;
+	
+	return tmp;
+}
+
+char*    Terminal::read_string(  )
+{
+	char * tmp;
+	
+	return tmp;
 }

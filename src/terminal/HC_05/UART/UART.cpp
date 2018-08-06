@@ -8,9 +8,6 @@
 
 void UART::init(void)
 {	
-	Interrupts::registerCallback(&isr_rxc_routine, USARTE0_RXC_vect_num);
-	Interrupts::registerCallback(&isr_txc_routine, USARTE0_TXC_vect_num);
-	Interrupts::registerCallback(&isr_dre_routine, USARTE0_DRE_vect_num);
 	
 	#define USART_BAUDRATE	9600
 	#define USART_BSEL	( (F_PER/16/USART_BAUDRATE)-1 )
@@ -54,45 +51,23 @@ void UART::init(void)
 	
 }
 
-void UART::isr_rxc_routine(void)
+
+bool UART::write_byte( uint8_t byte )
 {
-	PORTA.OUTTGL = 1<<5;
-	uint8_t data;
-	data = USART_BASE.DATA;
-	USART_BASE.DATA = data;
-	/*
-	if ( data_buffer_ready_to_read(&tx_data_buffer) )
-	USART_BASE.CTRLA |= USART_DREINTLVL_MED_gc;
-	else
-	USART_BASE.CTRLA &= ~(0x03<<2); // off TXC INT
-	*/	
+	return true;
 }
 
-void UART::isr_txc_routine(void)
+bool UART::write_multibyte( uint8_t * source, uint16_t count)
 {
-	PORTA.OUTTGL = 1<<4;
-	/*
-	uint8_t data;
-	data = USART_BASE.DATA;	
-	
-	data_buffer_write( &rx_data_buffer, data );
-	
-	if (data==';')
-	{
-		while(data_buffer_ready_to_read(&rx_data_buffer))
-			data_buffer_write(&tx_data_buffer,data_buffer_read(&rx_data_buffer));
-		USART_BASE.CTRLA |= USART_DREINTLVL_MED_gc;
-	}
-	*/	
+	return true;
 }
 
-void UART::isr_dre_routine(void)
+uint8_t UART::read_byte()
 {
-	PORTA.OUTTGL = 1<<3;
-	/*
-	if ( data_buffer_ready_to_read(&tx_data_buffer) )
-	USART_BASE.DATA = data_buffer_read(&tx_data_buffer);
-	else
-	USART_BASE.CTRLA &= ~(0x03<<0); // off DRE INT
-	*/
+	return 0;
+}
+
+bool UART::read_multibyte( uint8_t * dst, uint16_t count)
+{
+	return true;
 }

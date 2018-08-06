@@ -1,28 +1,19 @@
 #ifndef ISR_HEADER
 #define ISR_HEADER
 
+#include <avr/interrupt.h>
 #include "interrupts/interrupts.h"
 
-ISR( USARTE0_RXC_vect ) // Odebrany bajt
-{
-	Interrupts::isr_callbacks_routine( USARTE0_RXC_vect_num );
+// Mostek pomiedzy standardowym ISR a klasą Interrupts
+#define REGISTER_ISR(isr_vector) \
+ISR( isr_vector )\
+{\
+	Interrupts::isr_routine( isr_vector ## _num );\
 }
 
-ISR( USARTE0_TXC_vect ) // Wszystko wysłane
-{
-	Interrupts::isr_callbacks_routine( USARTE0_TXC_vect_num );
-
-}
-
-ISR( USARTE0_DRE_vect ) // Miejsce w buforze
-{
-	Interrupts::isr_callbacks_routine( USARTE0_DRE_vect_num );
-}
-
-ISR(PORTE_INT0_vect)
-{
-	Interrupts::isr_callbacks_routine( PORTE_INT0_vect_num);
-	//select_active_terminal();
-}
+REGISTER_ISR( USARTE0_RXC_vect )
+REGISTER_ISR( USARTE0_TXC_vect )
+REGISTER_ISR( USARTE0_DRE_vect )
+REGISTER_ISR( PORTE_INT0_vect )
 
 #endif

@@ -1,14 +1,17 @@
 #ifndef UART_HEADER
 #define UART_HEADER
 
+#include <inttypes.h>
+
 class UART
 {
 	public:
 	
 	void init(void);
-	static void isr_rxc_routine(void); // Odebrany bajt
-	static void isr_txc_routine(void); // Wszystko wysłane
-	static void isr_dre_routine(void); // Miejsce w buforze
+	bool write_byte( uint8_t byte );
+	bool write_multibyte( uint8_t * source, uint16_t count);
+	uint8_t read_byte();
+	bool read_multibyte( uint8_t * dst, uint16_t count);
 };
 
 #endif
