@@ -14,13 +14,14 @@
 #include "terminal/terminal.h"
 #include "ISR.h"
 
-Board board;
-Application application;
-Terminal terminal;
-SERVO servo;
 
 int main(void)
-{			
+{
+	Board board;
+	Application application;
+	Terminal terminal;
+	SERVO servo;
+	
 	//bootloader.check();
 	board.init();
 	terminal.init();

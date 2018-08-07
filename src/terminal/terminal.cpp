@@ -13,27 +13,32 @@ void Terminal::init(void)
 
 bool Terminal::isEnabled()
 {
-	return true;
+	return hc_05.isEnabled();
 }
 
 bool Terminal::write_char( char znak )
 {
-	return true;
+	return hc_05.write_byte(znak);
 }
 
-bool Terminal::write_uint8_t( uint8_t value)
+bool Terminal::write_number( uint8_t value)
 {
-	return true;
+	return false;
 }
 
-bool Terminal::write_uint16_t( uint16_t value)
+bool Terminal::write_number( uint16_t value)
 {
-	return true;
+	return false;
 }
 
 bool Terminal::write_string( char *string )
 {
-	return true;
+	return false;
+}
+
+bool Terminal::write_data( uint8_t *src, uint16_t count)
+{
+	return false;
 }
 
 char     Terminal::read_char(  )
@@ -48,14 +53,14 @@ uint8_t  Terminal::read_uint8_t( )
 
 uint16_t Terminal::read_uint16_t( )
 {
-	uint16_t tmp;
+	uint16_t tmp=0xffff;
 	
 	return tmp;
 }
 
 char*    Terminal::read_string(  )
 {
-	char * tmp;
+	char * tmp=0;
 	
 	return tmp;
 }

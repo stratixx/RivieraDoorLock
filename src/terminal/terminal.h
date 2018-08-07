@@ -11,10 +11,11 @@ class Terminal
 	
 	void init(void);	
 	bool isEnabled();
-	bool write_char( char znak );
-	bool write_uint8_t( uint8_t value);
-	bool write_uint16_t( uint16_t value);
-	bool write_string( char *string );
+	bool write_char( char );
+	bool write_number( uint8_t);
+	bool write_number( uint16_t );
+	bool write_string( char * );
+	bool write_data( uint8_t *, uint16_t );
 	char     read_char(  );
 	uint8_t  read_uint8_t( );
 	uint16_t read_uint16_t( );
