@@ -2,7 +2,7 @@
 #define ISR_HEADER
 
 #include <avr/interrupt.h>
-#include "interrupts/interrupts.h"
+#include "interrupts.h"
 
 // Mostek pomiedzy standardowym ISR a klasą Interrupts
 #define REGISTER_ISR(isr_vector) \

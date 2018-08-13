@@ -2,8 +2,8 @@
 #define HC_05_HEADER
 
 #include <inttypes.h>
-#include "../../data_buffer/data_buffer.h"
-#include "../../interrupts/interrupts.h"
+#include "../../utils/data_buffer/data_buffer.h"
+#include "../interrupts/interrupts.h"
 
 
 

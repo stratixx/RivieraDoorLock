@@ -2,6 +2,7 @@
 #define RFID_HEADER
 
 #include <inttypes.h>
+#include <avr/io.h>
 // DEFINICJE
 #define RFID_INTERFACE SPIC
 

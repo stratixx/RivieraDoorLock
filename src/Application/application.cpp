@@ -1,8 +1,7 @@
 
-#include "../config/config.h"
 #include "application.h"
 
-void Application::init(void)
+void Application::init()
 {
 	
 }

@@ -2,7 +2,6 @@
 
 
 */
-#include "../config/config.h"
 #include "RFID.h"
 
 RFID::RFID()

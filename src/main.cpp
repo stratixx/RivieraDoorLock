@@ -5,31 +5,26 @@
  * Author : Konrad
  */ 
 
+#include <stdlib.h>
 #include <avr/io.h>
-#include "config/config.h"
 #include "main.h"
-#include "board/board.h"
 #include "Application/application.h"
-#include "servo/servo.h"
-#include "terminal/terminal.h"
-#include "ISR.h"
-
+#include "HAL/hal.h"
+#include "HAL/interrupts/ISR.h"
 
 int main(void)
 {
-	Board board;
 	Application application;
-	Terminal terminal;
-	SERVO servo;
+	HAL hal;
 	
-	//bootloader.check();
-	board.init();
-	terminal.init();
-	servo.init();
-	application.init();
+	hal.application = &application;	
+	hal.bootcheck();	
+	hal.init();
+	hal.set_interrupts( true );
+	hal.show();
 	
-	PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
-	sei();	
-	
+	application.hal = &hal;
+	application.init();		
 	application.start();	
+	
 };

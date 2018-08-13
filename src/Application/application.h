@@ -1,10 +1,17 @@
 #ifndef APPLICATION_HEADER
 #define APPLICATION_HEADER
 
-class Application
+#include "application_conf.h"
+#include "Application_interface.h"
+#include "../HAL/hal_interface.h"
+
+class Application : public Application_interface
 {
-	public:
-	void init(void);
+	public:				
+	
+	HAL_interface * hal;
+	
+	void init();
 	void start(void);
 };
 
