@@ -31,6 +31,10 @@ class HC_05 : public Interrupts
 	bool echo_mode;
 	data_buffer_struct rx_data_buffer;
 	data_buffer_struct tx_data_buffer;
+	bool enabled;
+	bool connected;
+	
+	HC_05(void);
 	
 	void isr(uint8_t);
 	
@@ -41,9 +45,11 @@ class HC_05 : public Interrupts
 	void disable();
 	void init_transmision();
 	bool write_byte( uint8_t );
-	uint16_t write_multibyte( uint8_t *, uint16_t );
+	uint16_t write_multibyte( const char *, const uint16_t );
+	uint16_t write_multibyte( const char * );
 	uint8_t read_byte();
-	uint16_t read_multibyte( uint8_t * , uint16_t );
+	uint16_t read_multibyte( uint8_t * , const uint16_t );
+	//uint16_t read_string( char* );
 	
 	void isr_rxc_routine(uint8_t); // Odebrany bajt
 	void isr_txc_routine(uint8_t); // Wszystko wys³ane

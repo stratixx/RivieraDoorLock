@@ -29,7 +29,7 @@ return_code Interrupts::register_ISR_listener( InterruptsPointer isr_listener, u
 		return OK;
 	}
 	else
-		return ERROR;
+		return ISR_reg_error;
 }
 
 /*

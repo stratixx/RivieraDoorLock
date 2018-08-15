@@ -2,6 +2,7 @@
 #define INTERRUPTS_HEADER
 
 #include <avr/interrupt.h>
+#include "../../utils/return_code.h"
 
 /*
 	Wypisanie vectorów przerwañ w isr_listeners_list
@@ -16,11 +17,6 @@ enum vect_idx_type
 	INTERRUPTS_LIST_SIZE
 };
 
-enum return_code
-{
-	OK,
-	ERROR
-};
 
 // Oko-umilacz
 #define InterruptsPointer Interrupts*

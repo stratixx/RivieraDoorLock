@@ -5,26 +5,44 @@
  * Author : Konrad
  */ 
 
-#include <stdlib.h>
 #include <avr/io.h>
 #include "main.h"
 #include "Application/application.h"
 #include "HAL/hal.h"
+#include "Terminal/terminal.h"
 #include "HAL/interrupts/ISR.h"
+
+#define USE_TERMINAL
 
 int main(void)
 {
-	Application application;
-	HAL hal;
-	
-	hal.application = &application;	
-	hal.bootcheck();	
+	// HAL init
+	HAL hal;	
+	hal.bootcheck();
 	hal.init();
-	hal.set_interrupts( true );
-	hal.show();
 	
+	// Terminal init
+	Terminal terminal;
+	#ifdef USE_TERMINAL
+	terminal.hal = &hal;
+	terminal.init();
+	terminal.println("Terminal init... OK");
+	#endif
+	terminal.println("HAL init... OK");
+	
+	// Set segments references
+	Application application;	
+	hal.application = &application;
+	hal.terminal = &terminal;
+	terminal.application = &application;	
 	application.hal = &hal;
-	application.init();		
-	application.start();	
+	application.terminal = &terminal;
 	
+	// Application launch
+	terminal.println("Application launch... ");
+	terminal.print_return_code( application.launch() );
+	terminal.println("Application end!");
+	
+	hal.reboot();
+	while(1) __asm("nop;");
 };

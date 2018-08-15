@@ -4,13 +4,22 @@
 #include "HC_05.h"
 #include <stdlib.h>
 
+HC_05::HC_05(void)
+{	
+	usart = &USARTE0;
+	port = &PORTE;
+	baudrate = 9600;
+	echo_mode = false;
+	enabled = true;
+	connected = true;
+}
 
 void HC_05::init(void)
 {	
 	rx_data_buffer.tab_index = 50;
 	rx_data_buffer.tab = (uint8_t*)malloc(rx_data_buffer.tab_index);
 	data_buffer_clear(&rx_data_buffer);
-	tx_data_buffer.tab_index = 50;
+	tx_data_buffer.tab_index = 100;
 	tx_data_buffer.tab = (uint8_t*)malloc(tx_data_buffer.tab_index);
 	data_buffer_clear(&tx_data_buffer);
 		
@@ -19,10 +28,6 @@ void HC_05::init(void)
 	register_ISR_listener(this, USARTE0_DRE_vect_num);
 	register_ISR_listener(this, PORTE_INT0_vect_num);
 	
-	echo_mode = false;
-	usart = &USARTE0;
-	port = &PORTE;
-	baudrate = 9600;
 	uint32_t f_per = 2000000;
 	uint16_t bsel = ( (f_per/16/baudrate)-1 );
 			
@@ -94,7 +99,7 @@ void HC_05::init_transmision()
 	usart->CTRLA |= USART_DREINTLVL_MED_gc;
 }
 
-bool HC_05::write_byte( uint8_t byte )
+bool HC_05::write_byte( const uint8_t byte )
 {
 	if ( data_buffer_ready_to_write(&tx_data_buffer) )
 		data_buffer_write(&tx_data_buffer,byte);
@@ -103,14 +108,26 @@ bool HC_05::write_byte( uint8_t byte )
 	return true;
 }
 
-uint16_t HC_05::write_multibyte( uint8_t * source, uint16_t count)
+uint16_t HC_05::write_multibyte( const char * source, uint16_t count)
 {
-	for( uint16_t n=0; n<count; n++)
+	uint16_t n=0;
+	for( ; n<count; n++)
 		if ( data_buffer_ready_to_write(&tx_data_buffer) )
 			data_buffer_write(&tx_data_buffer,source[n]);
 		else
-			return count-n;
-	return 0;
+			break;
+	return n;
+}
+
+uint16_t HC_05::write_multibyte( const char * source )
+{
+	uint16_t n=0;
+	for( ; source[n]!=0; n++)
+		if ( data_buffer_ready_to_write(&tx_data_buffer) )
+			data_buffer_write(&tx_data_buffer,source[n]);
+		else
+			break;
+	return n;
 }
 
 uint8_t HC_05::read_byte()
@@ -118,7 +135,7 @@ uint8_t HC_05::read_byte()
 	return data_buffer_read(&rx_data_buffer);
 }
 
-uint16_t HC_05::read_multibyte( uint8_t * dst, uint16_t max_count)
+uint16_t HC_05::read_multibyte( uint8_t * dst, const uint16_t max_count)
 {
 	for( uint16_t n=0; n<max_count; n++)
 		if ( data_buffer_ready_to_read(&rx_data_buffer) )
@@ -158,7 +175,6 @@ void HC_05::isr_txc_routine(uint8_t isr_vector)
 
 void HC_05::isr_dre_routine(uint8_t isr_vector)
 {
-	PORTA.OUTTGL = 1<<3;
 	
 	if ( data_buffer_ready_to_read(&tx_data_buffer) )
 	usart->DATA = data_buffer_read(&tx_data_buffer);

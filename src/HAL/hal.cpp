@@ -5,7 +5,7 @@
 #include <util/delay.h>
 
 
-void HAL::init(void)
+return_code HAL::init(void)
 {
 	
 	PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
@@ -16,6 +16,11 @@ void HAL::init(void)
 	//rfid.init();
 	servo.init();
 	hc_05.init();
+	
+	set_interrupts( true );
+	show();
+	
+	return OK;
 }
 	
 void HAL::show(void)
@@ -36,6 +41,11 @@ void HAL::set_interrupts( bool state )
 }
 
 void HAL::bootcheck()
+{
+	
+}
+
+void HAL::reboot()
 {
 	
 }
