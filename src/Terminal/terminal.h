@@ -1,24 +1,23 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include "../utils/return_code.h"
-#include "../HAL/hal_interface.h"
-#include "../Application/application_interface.h"
-#include "terminal_interface.h"
-#include "../HAL/HC_05/HC_05.h"
+#include <inttypes.h>
 
-class Terminal : public Terminal_interface
+#include "../utils/return_code.h"
+#include "../HAL/hal.h"
+
+class Terminal
 {
 	public:
-	HAL_interface * hal;
-	HC_05 * hc_05;
-	Application_interface * application;
+	static bool enabled;
 	
-	Terminal(void);
-	return_code init();	
-	void print( const char* );
-	void println( const char* );
-	void print_return_code( const return_code );
+	static return_code init();	
+	static void print( const char* );
+	static void println( const char* );
+	static void print_return_code( const return_code );
+	
+	private:
+	Terminal(void) {  };
 };
 
 

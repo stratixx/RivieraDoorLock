@@ -4,21 +4,20 @@
 #include "hal.h"
 #include <util/delay.h>
 
+RFID HAL::rfid;
+SERVO HAL::servo;
+HC_05 HAL::hc_05;
 
 return_code HAL::init(void)
-{
-	
-	PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
-	
+{	
 	PORTA.OUTSET = 0xff;
 	PORTA.DIRSET = 0xff;
 	
-	//rfid.init();
+	rfid.init();
 	servo.init();
 	hc_05.init();
 	
 	set_interrupts( true );
-	show();
 	
 	return OK;
 }
@@ -35,7 +34,10 @@ void HAL::show(void)
 void HAL::set_interrupts( bool state )
 {
 	if( state==true )
+	{
+		PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 		sei();
+	}
 	else
 		cli();
 }

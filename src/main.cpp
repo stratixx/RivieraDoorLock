@@ -17,32 +17,23 @@
 int main(void)
 {
 	// HAL init
-	HAL hal;	
-	hal.bootcheck();
-	hal.init();
+	HAL::bootcheck();
+	HAL::init();
+	HAL::show();
 	
 	// Terminal init
-	Terminal terminal;
 	#ifdef USE_TERMINAL
-	terminal.hal = &hal;
-	terminal.init();
-	terminal.println("Terminal init... OK");
+	Terminal::init();
+	Terminal::println("Terminal init... OK");
 	#endif
-	terminal.println("HAL init... OK");
 	
-	// Set segments references
-	Application application;	
-	hal.application = &application;
-	hal.terminal = &terminal;
-	terminal.application = &application;	
-	application.hal = &hal;
-	application.terminal = &terminal;
 	
 	// Application launch
-	terminal.println("Application launch... ");
-	terminal.print_return_code( application.launch() );
-	terminal.println("Application end!");
+	Application application;
+	Terminal::println("Application launch... ");
+	Terminal::print_return_code( application.launch() );
+	Terminal::println("Application end!");
 	
-	hal.reboot();
+	//HAL::reboot();
 	while(1) __asm("nop;");
 };

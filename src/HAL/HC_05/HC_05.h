@@ -7,18 +7,6 @@
 
 
 
-	#define USART_BAUDRATE	9600
-	#define USART_BSEL	( (F_PER/16/USART_BAUDRATE)-1 )
-	
-	#define USART_BASE	USARTE0
-	#define USART_PORT	PORTE
-	#define USART_TX_PORT	USART_PORT
-	#define USART_RX_PORT	USART_PORT
-	#define USART_TX_PIN	(1<<3)
-	#define USART_RX_PIN	(1<<2)
-	#define BT_PORT			USART_PORT
-	#define BT_EN_PIN		(1<<1)
-	#define BT_STATE_PIN	(1<<0)
 	
 	
 class HC_05 : public Interrupts
