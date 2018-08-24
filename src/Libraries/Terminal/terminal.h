@@ -3,13 +3,15 @@
 
 #include <inttypes.h>
 
-#include "../utils/return_code.h"
-#include "../HAL/hal.h"
+#include "../../utils/return_code.h"
+#include "../../HAL/hal.h"
+#include "../HC_05/HC_05.h"
 
 class Terminal
 {
 	public:
 	static bool enabled;
+	static HC_05 hc_05;
 	
 	static return_code init();	
 	static void print( const char* );

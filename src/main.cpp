@@ -5,21 +5,30 @@
  * Author : Konrad
  */ 
 
-#include <avr/io.h>
 #include "main.h"
-#include "Application/application.h"
 #include "HAL/hal.h"
-#include "Terminal/terminal.h"
-#include "HAL/interrupts/ISR.h"
+#include "Application/application.h"
+#include "Libraries/Terminal/terminal.h"
 
 #define USE_TERMINAL
+
+//void SystemClock_Config(void);
 
 int main(void)
 {
 	// HAL init
 	HAL::bootcheck();
+	
 	HAL::init();
+	
 	HAL::show();
+	
+	/*
+	
+	MX_GPIO_Init();
+	MX_USART2_UART_Init();
+	MX_SPI1_Init();
+	*/
 	
 	// Terminal init
 	#ifdef USE_TERMINAL

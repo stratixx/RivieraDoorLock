@@ -2,7 +2,7 @@
 #include <inttypes.h>
 #include "application.h"
 #include "../HAL/hal.h"
-#include "../Terminal/terminal.h"
+#include "../Libraries/Terminal/terminal.h"
 
 
 return_code Application::launch(void)

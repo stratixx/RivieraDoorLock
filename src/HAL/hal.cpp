@@ -1,22 +1,21 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "hal_conf.h"
 #include "hal.h"
 #include <util/delay.h>
 
-RFID HAL::rfid;
-SERVO HAL::servo;
-HC_05 HAL::hc_05;
+SPI HAL::spi_C;
+UART HAL::uart_E0;
+GPIO HAL::gpio_A;
+GPIO HAL::gpio_B;
+GPIO HAL::gpio_C;
+GPIO HAL::gpio_D;
+GPIO HAL::gpio_E;
 
 return_code HAL::init(void)
 {	
 	PORTA.OUTSET = 0xff;
 	PORTA.DIRSET = 0xff;
-	
-	rfid.init();
-	servo.init();
-	hc_05.init();
-	
+		
 	set_interrupts( true );
 	
 	return OK;

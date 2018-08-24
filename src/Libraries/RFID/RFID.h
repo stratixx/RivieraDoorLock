@@ -3,6 +3,9 @@
 
 #include <inttypes.h>
 #include <avr/io.h>
+#include "../../utils/return_code.h"
+#include "../../HAL/hal.h"
+
 // DEFINICJE
 #define RFID_INTERFACE SPIC
 
@@ -10,10 +13,9 @@
 
 class RFID
 {
-	public:
-	uint16_t number;
-	
+	public:	
 	RFID();
+	return_code init(void);
 	
 };
 

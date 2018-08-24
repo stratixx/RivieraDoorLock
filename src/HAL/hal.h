@@ -2,17 +2,20 @@
 #define HAL_H
 
 #include "../utils/return_code.h"
-#include "RFID/RFID.h"
-#include "servo/servo.h"
-#include "HC_05/HC_05.h"
+#include "../Drivers/SPI/spi.h"
+#include "../Drivers/UART/uart.h"
+#include "../Drivers/GPIO/gpio.h"
 
 class HAL
 {
 	public:
-	//static Application * application;
-	static RFID rfid;
-	static SERVO servo;
-	static HC_05 hc_05;
+	static SPI spi_C;
+	static UART uart_E0;
+	static GPIO gpio_A;
+	static GPIO gpio_B;
+	static GPIO gpio_C;
+	static GPIO gpio_D;
+	static GPIO gpio_E;
 	
 	static return_code init(void);
 	static void show(void);

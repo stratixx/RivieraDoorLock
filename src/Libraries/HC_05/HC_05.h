@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include "../../utils/data_buffer/data_buffer.h"
 #include "../interrupts/interrupts.h"
+#include "../../HAL/hal.h"
 
 
 
