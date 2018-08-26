@@ -4,8 +4,8 @@
 #include <inttypes.h>
 #include "../../utils/data_buffer/data_buffer.h"
 #include "../interrupts/interrupts.h"
-#include "../../HAL/hal.h"
-
+#include "../../Drivers/UART/uart.h"
+#include "../../Drivers/GPIO/GPIO.h"
 
 
 	
@@ -13,13 +13,15 @@
 class HC_05 : public Interrupts
 {
 	public:
-	
-	USART_t * usart;
-	PORT_t * port;
-	uint32_t baudrate;
-	bool echo_mode;
+	UART * uart;
+	GPIO * gpio;
+	uint8_t state_pin;
+	uint8_t enable_pin;
+	uint8_t tx_buffer_size;
+	uint8_t rx_buffer_size;
 	data_buffer_struct rx_data_buffer;
 	data_buffer_struct tx_data_buffer;
+	bool echo_mode;
 	bool enabled;
 	bool connected;
 	

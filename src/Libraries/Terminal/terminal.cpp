@@ -1,6 +1,5 @@
 #include "terminal.h"
-
-extern const char* return_code_str[];
+#include "../../HAL/hal.h"
 
 HC_05 Terminal::hc_05;
 bool Terminal::enabled = false;

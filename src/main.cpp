@@ -10,7 +10,7 @@
 #include "Application/application.h"
 #include "Libraries/Terminal/terminal.h"
 
-#define USE_TERMINAL
+//#define USE_TERMINAL
 
 //void SystemClock_Config(void);
 
@@ -22,25 +22,23 @@ int main(void)
 	HAL::init();
 	
 	HAL::show();
-	
 	/*
 	
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_SPI1_Init();
 	*/
-	
+
 	// Terminal init
-	#ifdef USE_TERMINAL
+	//#ifdef USE_TERMINAL
 	Terminal::init();
 	Terminal::println("Terminal init... OK");
-	#endif
+	//#endif
 	
 	
 	// Application launch
-	Application application;
 	Terminal::println("Application launch... ");
-	Terminal::print_return_code( application.launch() );
+	Terminal::print_return_code( Application::launch() );
 	Terminal::println("Application end!");
 	
 	//HAL::reboot();

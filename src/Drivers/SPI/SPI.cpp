@@ -4,7 +4,7 @@
 */
 #include "SPI.h"
 
-SPI::SPI()
+SPI::SPI( SPI_t * _spi) : spi(_spi)
 {
 	
 }

@@ -4,7 +4,6 @@
 #include <inttypes.h>
 
 #include "../../utils/return_code.h"
-#include "../../HAL/hal.h"
 #include "../HC_05/HC_05.h"
 
 class Terminal

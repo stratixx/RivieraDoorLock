@@ -9,19 +9,28 @@
 class HAL
 {
 	public:
-	static SPI spi_C;
-	static UART uart_E0;
-	static GPIO gpio_A;
-	static GPIO gpio_B;
-	static GPIO gpio_C;
-	static GPIO gpio_D;
-	static GPIO gpio_E;
+	static SPI SPI_C;
+	static UART UART_E0;
+	static GPIO GPIO_A;
+	static GPIO GPIO_B;
+	static GPIO GPIO_C;
+	static GPIO GPIO_D;
+	static GPIO GPIO_E;
 	
-	static return_code init(void);
-	static void show(void);
+	static return_code init();
+	static return_code init_uart(UART*);
+	//static return_code init_gpio(GPIO*);
+	static void show();
 	static void bootcheck();
 	static void reboot();
 	static void set_interrupts( bool );
+	
+	// clock functions
+	static uint32_t get_clock_CPU();
+	static uint32_t get_clock_PER();
+	
+	// delays
+	static void delay_ms(uint16_t);
 		
 	private:
 	HAL() {  };

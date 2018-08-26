@@ -8,4 +8,6 @@ enum return_code
 	ISR_reg_error = 2
 };
 
+extern const char* return_code_str[];
+
 #endif
