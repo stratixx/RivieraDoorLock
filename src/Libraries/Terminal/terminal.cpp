@@ -10,12 +10,32 @@ return_code Terminal::init()
 	enabled = true;
 	return OK;
 }
+
+void Terminal::print(byte data)
+{
 	
+}	
+
+void Terminal::print(byte data, Print_mode mode)
+{
+	
+}
+
 void Terminal::print( const char * text )
 {
 	if( enabled==false ) return;
 	hc_05.write_multibyte(text);	
 	hc_05.init_transmision();
+}
+
+void Terminal::println(void)
+{
+	
+}
+
+void Terminal::println(byte data, Print_mode mode )
+{
+	
 }
 
 void Terminal::println( const char * text )

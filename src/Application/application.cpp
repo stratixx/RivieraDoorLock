@@ -4,15 +4,16 @@
 #include "../HAL/hal.h"
 #include "../Libraries/Terminal/terminal.h"
 
-RFID Application::rfid;
+//RFID Application::rfid;
 SERVO Application::servo;
+MFRC522 Application::rfid(5, 4, &HAL::SPI_C, SPISettings(SPI_CLOCK_DIV4, MSBFIRST, SPI_MODE0));
 
 return_code Application::launch(void)
 {
 	Terminal::println("Application start");
 	//led.init();
 	//servo.init();
-	rfid.init();
+	//rfid.init();
 	//rtc.init();
 	
 	uint16_t k=5;

@@ -5,7 +5,7 @@
 #define F_CPU 2000000UL
 #include <util/delay.h>
 
-SPI HAL::SPI_C(&SPIC);
+SPIClass HAL::SPI_C(&SPIC);
 UART HAL::UART_E0(&USARTE0, USARTE0_RXC_vect_num, USARTE0_TXC_vect_num, USARTE0_DRE_vect_num);
 GPIO HAL::GPIO_A(&PORTA, PORTA_INT0_vect_num, PORTA_INT1_vect_num);
 GPIO HAL::GPIO_B(&PORTB, PORTB_INT0_vect_num, PORTB_INT1_vect_num);
@@ -80,4 +80,38 @@ void HAL::delay_ms(uint16_t delay)
 		delay--;
 		_delay_ms(1);
 	}
+}
+
+void HAL::delay_us( byte delay )
+{
+	while( delay>0 )
+	{
+		delay--;
+		_delay_us(1);
+	}
+}
+
+uint32_t HAL::timestamp_ms()
+{
+	return 0;
+}
+
+byte HAL::pgm_read_byte( const byte * data )
+{
+	return *data;
+}
+
+void HAL::digitalWrite(byte pin, Digital_state state)
+{
+	
+}
+
+void HAL::pinMode(byte pin, Digital_mode mode)
+{
+	//Serial.println("hehe");
+}
+
+Digital_state HAL::digitalRead(byte pin)
+{
+	return Digital_state::HIGH;
 }

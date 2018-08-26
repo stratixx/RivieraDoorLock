@@ -10,7 +10,9 @@
 #include "Application/application.h"
 #include "Libraries/Terminal/terminal.h"
 
-//#define USE_TERMINAL
+#include "submodules/rfid/src/MFRC522.h"
+
+#define USE_TERMINAL
 
 //void SystemClock_Config(void);
 
@@ -30,12 +32,11 @@ int main(void)
 	*/
 
 	// Terminal init
-	//#ifdef USE_TERMINAL
+	#ifdef USE_TERMINAL
 	Terminal::init();
 	Terminal::println("Terminal init... OK");
-	//#endif
-	
-	
+	#endif
+			
 	// Application launch
 	Terminal::println("Application launch... ");
 	Terminal::print_return_code( Application::launch() );
