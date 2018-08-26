@@ -1,0 +1,3 @@
+[submodule "src/Libraries/submodules/rfid"]
+	path = src/Libraries/submodules/rfid
+	url = https://github.com/miguelbalboa/rfid
