@@ -5,7 +5,7 @@
 #define F_CPU 2000000UL
 #include <util/delay.h>
 
-SPIClass HAL::SPI_C(&SPIC);
+SPIClass HAL::SPI_C(&SPIC, GPIO_PIN_C5, GPIO_PIN_C6, GPIO_PIN_C7);
 UART HAL::UART_E0(&USARTE0, USARTE0_RXC_vect_num, USARTE0_TXC_vect_num, USARTE0_DRE_vect_num, GPIO_PIN_E3, GPIO_PIN_E2);
 
 return_code HAL::init(void)

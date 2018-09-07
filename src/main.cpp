@@ -24,19 +24,17 @@ int main(void)
 	HAL::init();
 	
 	HAL::show();
-	/*
-	
-	MX_GPIO_Init();
-	MX_USART2_UART_Init();
-	MX_SPI1_Init();
-	*/
 
 	// Terminal init
 	#ifdef USE_TERMINAL
 	Terminal::init();
 	Terminal::println("Terminal init... OK");
 	#endif
-			
+	
+	// SPI_C init
+	Terminal::println("SPI_C init... ");
+	Terminal::print_return_code( HAL::SPI_C.init() );
+				
 	// Application launch
 	Terminal::println("Application launch... ");
 	Terminal::print_return_code( Application::launch() );

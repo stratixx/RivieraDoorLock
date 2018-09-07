@@ -7,7 +7,7 @@
 
 //RFID Application::rfid;
 SERVO Application::servo;
-MFRC522 Application::rfid(GPIO_PIN_C4, GPIO_PIN_C3, &HAL::SPI_C, SPISettings(SPI_CLOCK_DIV4, MSBFIRST, SPI_MODE0));
+MFRC522 Application::rfid(GPIO_PIN_C4, GPIO_PIN_C3, &HAL::SPI_C, SPISettings(SPI_CLOCK_DIV128, MSBFIRST, SPI_MODE0));
 
 return_code Application::launch(void)
 {
