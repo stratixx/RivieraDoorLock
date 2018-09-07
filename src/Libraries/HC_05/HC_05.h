@@ -2,6 +2,7 @@
 #define HC_05_HEADER
 
 #include <inttypes.h>
+#include "return_code.h"
 #include "../../utils/data_buffer/data_buffer.h"
 #include "../interrupts/interrupts.h"
 #include "../../Drivers/UART/uart.h"
@@ -14,9 +15,9 @@ class HC_05 : public Interrupts
 {
 	public:
 	UART * uart;
-	GPIO * gpio;
-	uint8_t state_pin;
-	uint8_t enable_pin;
+	GPIO_pin state_pin;
+	uint8_t state_pin_ISR_vector;
+	GPIO_pin enable_pin;
 	uint8_t tx_buffer_size;
 	uint8_t rx_buffer_size;
 	data_buffer_struct rx_data_buffer;
@@ -25,11 +26,12 @@ class HC_05 : public Interrupts
 	bool enabled;
 	bool connected;
 	
-	HC_05(void);
+	//HC_05(void);
+	HC_05(UART*,GPIO_pin,GPIO_pin,uint8_t,uint8_t);
 	
 	void isr(uint8_t);
 	
-	void init(void);
+	return_code init(void);
 	bool isEnabled();
 	bool isConnected();
 	void enable();

@@ -13,7 +13,18 @@ enum vect_idx_type
 	USARTE0_RXC_vect_idx,
 	USARTE0_TXC_vect_idx,
 	USARTE0_DRE_vect_idx,
-	USARTE0_INT0_vect_idx,
+	PORTA_INT0_vect_idx,
+	PORTA_INT1_vect_idx,
+	PORTB_INT0_vect_idx,
+	PORTB_INT1_vect_idx,
+	PORTC_INT0_vect_idx,
+	PORTC_INT1_vect_idx,
+	PORTD_INT0_vect_idx,
+	PORTD_INT1_vect_idx,
+	PORTE_INT0_vect_idx,
+	PORTE_INT1_vect_idx,
+	PORTF_INT0_vect_idx,
+	PORTF_INT1_vect_idx,
 	INTERRUPTS_LIST_SIZE
 };
 
@@ -37,6 +48,7 @@ class Interrupts
 	
 	protected:
 	static return_code register_ISR_listener( InterruptsPointer, uint8_t);
+	static uint8_t get_pin_ISR_vector(uint8_t, uint8_t);
 	
 	private:
 	static InterruptsPointer* isr_listeners_list;

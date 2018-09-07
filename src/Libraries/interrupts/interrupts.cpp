@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include "interrupts.h"
+#include "GPIO/gpio.h"
 
 InterruptsPointer* Interrupts::isr_listeners_list = NULL;
 
@@ -51,6 +52,42 @@ InterruptsPointer* Interrupts::get_listener( uint8_t isr_vector )
 			case USARTE0_DRE_vect_num:
 			pointer = &isr_listeners_list[USARTE0_DRE_vect_idx];
 			break;
+			case PORTA_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTA_INT0_vect_idx];
+			break;
+			case PORTA_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTA_INT1_vect_idx];
+			break;
+			case PORTB_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTB_INT0_vect_idx];
+			break;
+			case PORTB_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTB_INT1_vect_idx];
+			break;
+			case PORTC_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTC_INT0_vect_idx];
+			break;
+			case PORTC_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTC_INT1_vect_idx];
+			break;
+			case PORTD_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTD_INT0_vect_idx];
+			break;
+			case PORTD_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTD_INT1_vect_idx];
+			break;
+			case PORTE_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTE_INT0_vect_idx];
+			break;
+			case PORTE_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTE_INT1_vect_idx];
+			break;
+			case PORTF_INT0_vect_num:
+			pointer = &isr_listeners_list[PORTF_INT0_vect_idx];
+			break;
+			case PORTF_INT1_vect_num:
+			pointer = &isr_listeners_list[PORTF_INT1_vect_idx];
+			break;
 		}
 	return pointer;
 }
@@ -78,4 +115,9 @@ void Interrupts::isr_routine( uint8_t isr_vector )
 	{
 		// nieobsługiwany vector, nie ma go w switchu get_listener(uint8_t) lub niepoprawnie zainicjalizowana lista
 	}
+}
+
+uint8_t Interrupts::get_pin_ISR_vector( uint8_t pin, uint8_t vector_select )
+{
+	return GPIO::get_ISR_vector(pin, vector_select);
 }

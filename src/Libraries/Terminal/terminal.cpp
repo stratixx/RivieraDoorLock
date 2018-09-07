@@ -1,13 +1,13 @@
 #include "terminal.h"
 #include "../../HAL/hal.h"
 
-HC_05 Terminal::hc_05;
+HC_05 Terminal::hc_05(&HAL::UART_E0,GPIO_PIN_E0,GPIO_PIN_E1,250,50);
 bool Terminal::enabled = false;
 
 return_code Terminal::init()
 {
 	hc_05.init();
-	enabled = true;
+	enabled = hc_05.isConnected();
 	return OK;
 }
 
@@ -40,6 +40,7 @@ void Terminal::println(byte data, Print_mode mode )
 
 void Terminal::println( const char * text )
 {
+	enabled = hc_05.isConnected();
 	if( enabled==false ) return;
 	hc_05.write_multibyte(text);
 	hc_05.write_multibyte("\n\r");

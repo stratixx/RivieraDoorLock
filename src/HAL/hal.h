@@ -10,28 +10,21 @@
 	#define byte uint8_t
 #endif
 
-enum Digital_state : byte
-{
-	LOW,
-	HIGH
-};
+#define DEBUG_ACTIVE 1
 
-enum Digital_mode : byte
-{
-	INPUT,
-	OUTPUT
-};
+#ifdef DEBUG_ACTIVE
+	#define DEBUG_CMD(arg) arg
+#else
+	#define DEBUG_CMD(arg) 
+#endif
+
+//extern GPIO GPIO;
 
 class HAL
 {
 	public:
 	static SPIClass SPI_C;
 	static UART UART_E0;
-	static GPIO GPIO_A;
-	static GPIO GPIO_B;
-	static GPIO GPIO_C;
-	static GPIO GPIO_D;
-	static GPIO GPIO_E;
 	
 	static return_code init();
 	static return_code init_uart(UART*);
@@ -54,19 +47,7 @@ class HAL
 	static void delay_us(byte);
 	// timestamp miliseconds
 	static uint32_t timestamp_ms();
-	
-	// ### Memory operations ###
-	// program memory read
-	static byte pgm_read_byte(const byte*);
-	
-	// ### GPIO operations ###
-	// Ustawienie stanu pinu
-	static void digitalWrite(byte, Digital_state);
-	// Ustawienie kierunku pinu
-	static void pinMode(byte, Digital_mode);
-	// Odczyt stanu pinu
-	static Digital_state digitalRead(byte);
-		
+			
 	private:
 	HAL() {  };
 };

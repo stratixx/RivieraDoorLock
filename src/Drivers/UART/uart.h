@@ -15,16 +15,16 @@ class UART
 	} settings;
 	
 	USART_t * usart;
-	GPIO * gpio;
-	uint8_t tx_pin;
-	uint8_t rx_pin;
+	GPIO_pin tx_pin;
+	GPIO_pin rx_pin;
 	const uint8_t RXC_vect_num;
 	const uint8_t TXC_vect_num;
 	const uint8_t DRE_vect_num;
 	
 	//UART(void);
-	UART(USART_t*,uint8_t,uint8_t,uint8_t);
+	UART(USART_t*,uint8_t,uint8_t,uint8_t,GPIO_pin,GPIO_pin);
 	return_code init(void);		
+	void init_transmision(void);
 };
 
 
