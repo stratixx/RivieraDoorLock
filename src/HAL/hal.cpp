@@ -29,10 +29,10 @@ return_code HAL::init_uart(UART* uart)
 void HAL::show(void)
 {	
 	for ( uint8_t pin=GPIO_PIN_A3; pin<=GPIO_PIN_A6; pin++ )
-		for (uint8_t n=0; n<6; n++)
+		for (uint8_t n=0; n<4; n++)
 		{
 			GPIO::digitalWrite(pin,TOGGLE);
-			delay_ms(250);
+			delay_ms(200);
 			
 		}
 }

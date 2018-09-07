@@ -12,9 +12,15 @@
 
 enum Print_mode : byte
 {
-	DEC = 10,
-	HEX = 16
+	BIN,
+	DEC,
+	HEX, 
+	DEC_WORD, 
+	HEX_WORD
 };
+
+#define Terminal_default_print_mode Print_mode::DEC
+
 
 class Terminal
 {
@@ -24,13 +30,14 @@ class Terminal
 	
 	static return_code init();	
 	
-	static void print(byte);
-	static void print(byte, Print_mode);
-	static void print( const char* );
+	static void print  ( const char* text=0 );
+	static void println( const char* text=0 );
 	
-	static void println(void);
-	static void println(byte, Print_mode);
-	static void println( const char* );
+	//static void print  (byte, Print_mode=Terminal_default_print_mode);	
+	//static void println(byte, Print_mode=Terminal_default_print_mode);
+	static void print  (uint16_t, Print_mode=Terminal_default_print_mode);	
+	static void println(uint16_t, Print_mode=Terminal_default_print_mode);
+	
 	static void print_return_code( const return_code );
 	
 	private:

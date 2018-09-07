@@ -17,18 +17,20 @@ return_code Application::launch(void)
 	//rfid.init();
 	//rtc.init();
 	GPIO::pinMode(GPIO_PIN_A3, OUTPUT);
-	uint16_t k='Z';
+	uint16_t k=0;
 	while (1)
 	{
-		if(k==0)
-			break;
-		k--;
-		Terminal::println("Application loop");
+		Terminal::print(k,HEX_WORD);
+		Terminal::println(": Application loop");
 		
 		//PORTA.OUTTGL = 1<<3;
 		GPIO::digitalWrite(GPIO_PIN_A3,TOGGLE);
 		
 		HAL::delay_ms(500);
+		
+		k++;
+		if(k>20)
+		break;
 	}
 	return OK;
 }
