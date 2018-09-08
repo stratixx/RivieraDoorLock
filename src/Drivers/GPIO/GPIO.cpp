@@ -65,7 +65,7 @@ void GPIO::pinMode(byte pin, GPIO_pin_mode mode)
 	}
 	else
 		port->INT1MASK &= ~pin_mask;	
-		
+	
 	// PORT INT EDGE SELECT
 	if( (mode & GPIO_pin_mode::INT_BOTHEDGES)==GPIO_pin_mode::INT_BOTHEDGES )
 		*PINxCTRL = ((*PINxCTRL)&0xf8) | PORT_ISC_BOTHEDGES_gc;
@@ -73,8 +73,8 @@ void GPIO::pinMode(byte pin, GPIO_pin_mode mode)
 		*PINxCTRL = ((*PINxCTRL)&0xf8) | PORT_ISC_FALLING_gc;
 	else if( (mode & GPIO_pin_mode::INT_RISING)==GPIO_pin_mode::INT_RISING )
 		*PINxCTRL = ((*PINxCTRL)&0xf8) | PORT_ISC_RISING_gc;
-	else
-		*PINxCTRL = ((*PINxCTRL)&0xf8) | PORT_ISC_INPUT_DISABLE_gc;
+	//else
+	//	*PINxCTRL = ((*PINxCTRL)&0xf8) | PORT_ISC_INPUT_DISABLE_gc;
 		
 }
 

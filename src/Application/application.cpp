@@ -19,27 +19,16 @@ return_code Application::launch(void)
 	//rtc.init();
 	GPIO::pinMode(GPIO_PIN_A3, OUTPUT);
 	
+	Terminal::println("RFID INIT: ");
 	rfid.PCD_Init();
-	HAL::delay_ms(200);
-	Terminal::print("RFID INIT: ");
-	HAL::delay_ms(300);
-	bool res = rfid.PCD_PerformSelfTest();
-	HAL::delay_ms(300);
-	Terminal::println(res,BIN);
-	HAL::delay_ms(300);
-	Terminal::println("---------");
-	HAL::delay_ms(200);
-	rfid.PCD_DumpVersionToSerial();
-	HAL::delay_ms(300);
-	Terminal::println("---------");
-	HAL::delay_ms(200);
-	Terminal::print("antena gain: ");
 	rfid.PCD_AntennaOn();
-	Terminal::println(rfid.PCD_GetAntennaGain(),HEX);
+	rfid.PCD_DumpVersionToSerial();
+	Terminal::print("RFID selftest: ");
+	Terminal::println(rfid.PCD_PerformSelfTest(),BIN);
+	Terminal::println("RFID INIT END ");
+	
 	uint8_t k=0;
-	HAL::SPI_C.spiSettings.clock_div = SPI_CLOCK_DIV128;
-	HAL::SPI_C.spiSettings.data_order = SPI_DATA_ORDER::MSBFIRST;
-	HAL::SPI_C.spiSettings.mode = SPI_MODE::SPI_MODE0;
+	byte res;
 	
 	while (1)
 	{
@@ -56,7 +45,7 @@ return_code Application::launch(void)
 		*/
 		res = rfid.PICC_IsNewCardPresent();
 		Terminal::println(res,HEX);
-		//PORTA.OUTTGL = 1<<3;
+		
 		GPIO::digitalWrite(GPIO_PIN_A3,TOGGLE);
 		
 		HAL::delay_ms(500);
