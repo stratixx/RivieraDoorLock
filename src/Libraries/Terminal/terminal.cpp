@@ -49,13 +49,13 @@ void Terminal::print(uint16_t data, Print_mode mode)
 		sprintf(buffer, "%3u", data);
 		break;
 		case Print_mode::HEX:
-		sprintf(buffer, "0x%2.2X", data);
+		sprintf(buffer, "%2.2X", data);
 		break;
 		case Print_mode::DEC_WORD:
 		sprintf(buffer, "%5u", data);
 		break;
 		case Print_mode::HEX_WORD:
-		sprintf(buffer, "0x%4.4X", data);
+		sprintf(buffer, "%4.4X", data);
 		break;
 	}
 	print(buffer);

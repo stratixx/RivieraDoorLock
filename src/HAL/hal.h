@@ -24,6 +24,7 @@ class HAL
 {
 	public:
 	static SPIClass SPI_C;
+	static SPIClass SPI_D;
 	static UART UART_E0;
 	
 	static return_code init();
